@@ -92,7 +92,7 @@ export async function action({ request }: ActionFunctionArgs) {
 
   try {
     return await authenticator.authenticate(AUTH_STRATEGY_NAME, request, {
-      successRedirect: "/auth/sign-up",
+      successRedirect: "/todos/incomplete",
       throwOnError: true,
     });
   } catch (error) {
