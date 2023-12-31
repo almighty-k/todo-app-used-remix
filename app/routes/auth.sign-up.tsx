@@ -4,7 +4,7 @@ import { Form, useActionData, useNavigation } from "@remix-run/react";
 import { Button, Fieldset, Stack, Text, TextInput } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 
-import { CreateUserSchema, createUser } from "../lib/create-user.server";
+import { CreateUserSchema, createUser } from "../lib/user.server";
 import { commonActionData } from "../utils";
 
 export default function SignUp() {
