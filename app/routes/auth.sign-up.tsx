@@ -1,7 +1,14 @@
 import { useEffect } from "react";
 import { type ActionFunctionArgs, json, redirect } from "@remix-run/node";
-import { Form, useActionData, useNavigation } from "@remix-run/react";
-import { Button, Fieldset, Stack, Text, TextInput } from "@mantine/core";
+import { Form, NavLink, useActionData, useNavigation } from "@remix-run/react";
+import {
+  Anchor,
+  Button,
+  Fieldset,
+  Stack,
+  Text,
+  TextInput,
+} from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 
 import { CreateUserSchema, createUser } from "../lib/user.server";
@@ -52,6 +59,12 @@ export default function SignUp() {
           <Button type="submit" fullWidth>
             登録
           </Button>
+          <Anchor
+            ta="center"
+            renderRoot={(props) => <NavLink to="/auth/sign-in" {...props} />}
+          >
+            ログインはこちら
+          </Anchor>
         </Stack>
       </Form>
     </>
