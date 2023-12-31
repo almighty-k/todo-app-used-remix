@@ -1,5 +1,9 @@
 import { useEffect } from "react";
-import { type ActionFunctionArgs, json } from "@remix-run/node";
+import {
+  type ActionFunctionArgs,
+  json,
+  LoaderFunctionArgs,
+} from "@remix-run/node";
 import { Form, NavLink, useActionData, useNavigation } from "@remix-run/react";
 import {
   Anchor,
@@ -70,6 +74,12 @@ export default function SignUp() {
       </Form>
     </>
   );
+}
+
+export async function loader({ request }: LoaderFunctionArgs) {
+  return await authenticator.isAuthenticated(request, {
+    successRedirect: "/todos/incomplete",
+  });
 }
 
 export async function action({ request }: ActionFunctionArgs) {

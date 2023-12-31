@@ -10,7 +10,7 @@ import {
   Anchor,
 } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
-import { ActionFunctionArgs, json } from "@remix-run/node";
+import { ActionFunctionArgs, LoaderFunctionArgs, json } from "@remix-run/node";
 
 import {
   AUTH_STRATEGY_NAME,
@@ -74,6 +74,12 @@ export default function SignIn() {
       </Form>
     </>
   );
+}
+
+export async function loader({ request }: LoaderFunctionArgs) {
+  return await authenticator.isAuthenticated(request, {
+    successRedirect: "/todos/incomplete",
+  });
 }
 
 export async function action({ request }: ActionFunctionArgs) {
