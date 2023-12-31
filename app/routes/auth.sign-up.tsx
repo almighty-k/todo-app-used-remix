@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { type ActionFunctionArgs, json, redirect } from "@remix-run/node";
+import { type ActionFunctionArgs, json } from "@remix-run/node";
 import { Form, NavLink, useActionData, useNavigation } from "@remix-run/react";
 import {
   Anchor,
@@ -13,6 +13,7 @@ import { notifications } from "@mantine/notifications";
 
 import { CreateUserSchema, createUser } from "../lib/user.server";
 import { commonActionData } from "../utils";
+import { AUTH_STRATEGY_NAME, authenticator } from "../lib/auth.server";
 
 export default function SignUp() {
   const actionData = useActionData<typeof action>();
@@ -72,7 +73,8 @@ export default function SignUp() {
 }
 
 export async function action({ request }: ActionFunctionArgs) {
-  const formDataObj = Object.fromEntries(await request.formData());
+  const cloneRequest = request.clone();
+  const formDataObj = Object.fromEntries(await cloneRequest.formData());
 
   const validated = CreateUserSchema.safeParse(formDataObj);
   if (!validated.success) {
@@ -90,5 +92,7 @@ export async function action({ request }: ActionFunctionArgs) {
     });
   }
 
-  return redirect("/todos");
+  return await authenticator.authenticate(AUTH_STRATEGY_NAME, request, {
+    successRedirect: "/todos/incomplete",
+  });
 }
