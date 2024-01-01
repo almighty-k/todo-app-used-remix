@@ -1,27 +1,23 @@
 import { Tabs } from "@mantine/core";
 import { type LoaderFunctionArgs } from "@remix-run/node";
-import { Outlet, useNavigate, useParams } from "@remix-run/react";
+import { Outlet, useLocation, useNavigate } from "@remix-run/react";
 
 import { authenticator } from "../lib/auth.server";
-import invariant from "tiny-invariant";
-import { ERROR_MESSAGES } from "../utils";
 
 export default function Todos() {
   const navigate = useNavigate();
-
-  const { status } = useParams();
-  invariant(status, ERROR_MESSAGES.invalidParam);
+  const location = useLocation();
 
   return (
     <>
       <Tabs
-        value={status}
-        onChange={(newStatus) => navigate(newStatus || "incomplete")}
+        value={location.pathname}
+        onChange={(newProgress) => navigate(newProgress || "/todos/incomplete")}
       >
         <Tabs.List>
-          <Tabs.Tab value="incomplete">未了</Tabs.Tab>
-          <Tabs.Tab value="inprogress">着手</Tabs.Tab>
-          <Tabs.Tab value="complete">完了</Tabs.Tab>
+          <Tabs.Tab value="/todos/incomplete">未了</Tabs.Tab>
+          <Tabs.Tab value="/todos/inprogress">着手</Tabs.Tab>
+          <Tabs.Tab value="/todos/complete">完了</Tabs.Tab>
         </Tabs.List>
       </Tabs>
 
