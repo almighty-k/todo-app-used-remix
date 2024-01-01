@@ -20,6 +20,7 @@ model Todo {
   updatedAt DateTime @updatedAt
   title     String
   progress  String
+  bookmark  Boolean  @default(false)
   userId    Int
   user      User     @relation(fields: [userId], references: [id])
 }
