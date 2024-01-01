@@ -19,8 +19,8 @@ export default function Todos() {
             <NavLink
               to={`${location.pathname}/new`}
               {...props}
-              replace
               state={{ prevPath: location.pathname }}
+              replace
             />
           )}
         >

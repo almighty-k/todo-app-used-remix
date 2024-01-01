@@ -30,8 +30,12 @@ export default function TodosNew() {
   const submitting = useNavigation().state === "submitting";
 
   return (
-    <Modal opened onClose={() => navigate(prevPath)} title="作成">
-      <Form method="post">
+    <Modal
+      opened
+      onClose={() => navigate(prevPath, { replace: true })}
+      title="作成"
+    >
+      <Form method="post" replace>
         <Stack
           renderRoot={(props) => (
             <Fieldset
