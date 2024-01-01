@@ -14,13 +14,23 @@ export default function TodosByStatus() {
   const { todos } = useLoaderData<typeof loader>();
 
   const navigation = useNavigation();
-  if (navigation.state === "loading") return <CenterLoader />;
+  if (navigation.state === "loading")
+    return (
+      <>
+        <CenterLoader />
+        <Outlet />
+      </>
+    );
 
   if (!todos.length)
     return (
-      <Text my="sm" size="sm" ta="center">
-        該当するTODOはありません。
-      </Text>
+      <>
+        <Text my="sm" size="sm" ta="center">
+          該当するTODOはありません。
+        </Text>
+
+        <Outlet />
+      </>
     );
 
   return (

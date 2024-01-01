@@ -1,15 +1,33 @@
-import { Tabs } from "@mantine/core";
+import { Text, Flex, Tabs, ActionIcon, Stack } from "@mantine/core";
 import { type LoaderFunctionArgs } from "@remix-run/node";
-import { Outlet, useLocation, useNavigate } from "@remix-run/react";
+import { NavLink, Outlet, useLocation, useNavigate } from "@remix-run/react";
 
 import { authenticator } from "../lib/auth.server";
+import { CreateIcon } from "../components/icons";
 
 export default function Todos() {
   const navigate = useNavigate();
   const location = useLocation();
 
   return (
-    <>
+    <Stack gap="xs">
+      <Flex align="center" gap="sm">
+        <Text>Todo一覧</Text>
+        <ActionIcon
+          variant="light"
+          renderRoot={(props) => (
+            <NavLink
+              to={`${location.pathname}/new`}
+              {...props}
+              replace
+              state={{ prevPath: location.pathname }}
+            />
+          )}
+        >
+          <CreateIcon />
+        </ActionIcon>
+      </Flex>
+
       <Tabs
         value={location.pathname}
         onChange={(newProgress) => navigate(newProgress || "/todos/incomplete")}
@@ -22,7 +40,7 @@ export default function Todos() {
       </Tabs>
 
       <Outlet />
-    </>
+    </Stack>
   );
 }
 
