@@ -30,7 +30,7 @@ export default function TodosByStatus() {
           {todos.map((todo) => (
             <Table.Tr key={todo.id}>
               <Table.Td w="2rem">
-                <Rating count={1} defaultValue={1} />
+                <Rating count={1} defaultValue={todo.bookmark ? 1 : 0} />
               </Table.Td>
               <Table.Td>{todo.title}</Table.Td>
               <Table.Td>
