@@ -34,7 +34,7 @@ import {
   BookmarkedIcon,
   UnBookmarkedIcon,
 } from "../components/icons";
-import { TodosProgressBadge } from "../components/todos";
+import { TodoProgressBadge } from "../components/todos";
 import { CenterLoader } from "../components/loader";
 import { changeTodoBookmarked, deleteTodo, getTodos } from "../lib/todo.server";
 import { ERROR_MESSAGES } from "../utils";
@@ -95,7 +95,7 @@ function TableRow({ todo }: TableRowProps) {
       </Table.Td>
       <Table.Td>{todo.title}</Table.Td>
       <Table.Td>
-        <TodosProgressBadge
+        <TodoProgressBadge
           progress={todo.progress as "incomplete" | "inprogress" | "complete"}
         />
       </Table.Td>

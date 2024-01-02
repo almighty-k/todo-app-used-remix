@@ -6,11 +6,11 @@ const statusOptions = {
   complete: { color: "green", label: "完了" },
 };
 
-interface TodosProgressBadgeProps {
+interface TodoProgressBadgeProps {
   progress: keyof typeof statusOptions;
 }
 
-export function TodosProgressBadge({ progress }: TodosProgressBadgeProps) {
+export function TodoProgressBadge({ progress }: TodoProgressBadgeProps) {
   const { color, label } = statusOptions[progress];
 
   return (
