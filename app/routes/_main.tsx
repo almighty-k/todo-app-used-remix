@@ -1,10 +1,10 @@
-import { Text, AppShell, Burger, Flex, Button } from "@mantine/core";
+import { Text, AppShell, Burger, Button, Stack, Flex } from "@mantine/core";
 import { type LoaderFunctionArgs } from "@remix-run/node";
-import { NavLink, Outlet, useLocation } from "@remix-run/react";
+import { Form, NavLink, Outlet, useLocation } from "@remix-run/react";
 import { useDisclosure } from "@mantine/hooks";
 
 import { authenticator } from "../lib/auth.server";
-import { TodosIcon, BookmarkIcon } from "../components/icons";
+import { TodosIcon, BookmarkIcon, LogoutIcon } from "../components/icons";
 
 export default function Todos() {
   const [opened, { toggle }] = useDisclosure();
@@ -27,7 +27,24 @@ export default function Todos() {
       </AppShell.Header>
 
       <AppShell.Navbar p="md">
-        <NavLinks />
+        <Stack h="100%" justify="space-between">
+          <NavLinks />
+
+          {/* _main.tsxはルート扱いになり、actionを定義できない。 */}
+          {/* そのため、_main.logout.tsxにログアウトのアクションを定義し、そのアクションを呼び出す。 */}
+          <Form method="post" action="logout">
+            <Button
+              type="submit"
+              variant="transparent"
+              color="gray"
+              justify="start"
+              fullWidth
+              leftSection={<LogoutIcon />}
+            >
+              ログアウト
+            </Button>
+          </Form>
+        </Stack>
       </AppShell.Navbar>
 
       <AppShell.Main>
@@ -61,7 +78,7 @@ function NavLinks() {
   ];
 
   return (
-    <>
+    <div>
       {links.map((link) => (
         <Button
           key={link.to}
@@ -70,11 +87,12 @@ function NavLinks() {
           color={link.active ? "blue" : "gray"}
           leftSection={link.icon}
           renderRoot={(props) => <NavLink to={link.to} {...props} />}
+          fullWidth
         >
           {link.label}
         </Button>
       ))}
-    </>
+    </div>
   );
 }
 
