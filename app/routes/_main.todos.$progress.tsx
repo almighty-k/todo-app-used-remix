@@ -119,6 +119,8 @@ function DeleteConfirmModal() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
+  const submitting = useNavigation().state === "submitting";
+
   return (
     <Modal
       opened={!!searchParams.get("deletedId")}
@@ -138,6 +140,7 @@ function DeleteConfirmModal() {
           value="delete"
           ml="auto"
           color="red"
+          disabled={submitting}
         >
           削除
         </Button>
