@@ -21,6 +21,18 @@ export async function getTodos({
   });
 }
 
+export async function getTodosByBookmarked({ userId }: { userId: number }) {
+  return await prisma.todo.findMany({
+    where: {
+      userId,
+      bookmarked: true,
+    },
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+}
+
 export async function getTodo({ id }: { id: number }) {
   const todo = await prisma.todo.findUnique({
     where: {
