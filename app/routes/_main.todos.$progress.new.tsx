@@ -15,7 +15,7 @@ import {
 
 import { authenticator } from "../lib/auth.server";
 import { CreateTodoSchema, createTodo } from "../lib/todo.server";
-import { ERROR_MESSAGES, commonActionData } from "../utils";
+import { ERROR_MESSAGES } from "../utils";
 import {
   SUCCESS_MESSAGE_KEY,
   commitSession,
@@ -74,7 +74,6 @@ export async function action({ request }: ActionFunctionArgs) {
 
   if (!validated.success) {
     return json({
-      ...commonActionData,
       validationErrors: validated.error.flatten().fieldErrors,
     });
   }
