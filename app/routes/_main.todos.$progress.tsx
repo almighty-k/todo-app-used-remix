@@ -40,7 +40,7 @@ import {
 } from "../lib/session.server";
 import { type UnwrapArray } from "../type";
 
-export default function TodosByStatus() {
+export default function TodosByProgress() {
   const { todos } = useLoaderData<typeof loader>();
   const navigation = useNavigation();
 
