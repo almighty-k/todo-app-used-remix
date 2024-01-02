@@ -13,6 +13,9 @@ export async function getTodos({
       userId,
       progress,
     },
+    orderBy: {
+      updatedAt: "desc",
+    },
   });
 }
 
