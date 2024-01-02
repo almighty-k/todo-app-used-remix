@@ -1,9 +1,9 @@
 import {
   Form,
   useActionData,
-  useLocation,
   useNavigate,
   useNavigation,
+  useParams,
 } from "@remix-run/react";
 import { Button, Fieldset, Modal, Stack, TextInput } from "@mantine/core";
 import {
@@ -15,21 +15,20 @@ import {
 
 import { authenticator } from "../lib/auth.server";
 import { CreateTodoSchema, createTodo } from "../lib/todo.server";
-import { commonActionData } from "../utils";
+import { ERROR_MESSAGES, commonActionData } from "../utils";
 import {
   SUCCESS_MESSAGE_KEY,
   commitSession,
   getSession,
 } from "../lib/session.server";
+import invariant from "tiny-invariant";
 
 export default function TodosNew() {
+  const { progress } = useParams();
+  invariant(progress, ERROR_MESSAGES.invalidParam);
+
   const actionData = useActionData<typeof action>();
   const validationErrors = actionData?.validationErrors;
-
-  const location = useLocation();
-  const prevPath = location.state
-    ? location.state.prevPath
-    : "/todos/incomplete";
 
   const navigate = useNavigate();
   const submitting = useNavigation().state === "submitting";
@@ -37,7 +36,7 @@ export default function TodosNew() {
   return (
     <Modal
       opened
-      onClose={() => navigate(prevPath, { replace: true })}
+      onClose={() => navigate(`/todos/${progress}`, { replace: true })}
       title="作成"
     >
       <Form method="post" replace>

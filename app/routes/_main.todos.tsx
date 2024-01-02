@@ -16,12 +16,7 @@ export default function Todos() {
         <ActionIcon
           variant="light"
           renderRoot={(props) => (
-            <NavLink
-              to={`${location.pathname}/new`}
-              {...props}
-              state={{ prevPath: location.pathname }}
-              replace
-            />
+            <NavLink to={`${location.pathname}/new`} {...props} replace />
           )}
         >
           <CreateIcon />
