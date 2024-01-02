@@ -11,6 +11,7 @@ import { changeTodoBookmarked, getTodosByBookmarked } from "../lib/todo.server";
 import { CenterLoader } from "../components/loader";
 import { TodoProgressBadge } from "../components/todos";
 import { BookmarkButton } from "../components/button";
+import { CommonErrorBoundary } from "../components/error-boundary";
 
 export default function BookmarksIndex() {
   const { bookmarkedTodos } = useLoaderData<typeof loader>();
@@ -49,6 +50,10 @@ export default function BookmarksIndex() {
       </TableTbody>
     </Table>
   );
+}
+
+export function ErrorBoundary() {
+  return <CommonErrorBoundary />;
 }
 
 export async function loader({ request }: LoaderFunctionArgs) {

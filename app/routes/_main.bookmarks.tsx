@@ -3,6 +3,7 @@ import { LoaderFunctionArgs } from "@remix-run/node";
 import { Stack, Text } from "@mantine/core";
 
 import { authenticator } from "../lib/auth.server";
+import { CommonErrorBoundary } from "../components/error-boundary";
 
 export default function Bookmarks() {
   return (
@@ -11,6 +12,10 @@ export default function Bookmarks() {
       <Outlet />
     </Stack>
   );
+}
+
+export function ErrorBoundary() {
+  return <CommonErrorBoundary />;
 }
 
 export async function loader({ request }: LoaderFunctionArgs) {

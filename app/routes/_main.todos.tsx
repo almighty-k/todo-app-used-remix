@@ -4,6 +4,7 @@ import { NavLink, Outlet, useLocation, useNavigate } from "@remix-run/react";
 
 import { authenticator } from "../lib/auth.server";
 import { CreateIcon } from "../components/icons";
+import { CommonErrorBoundary } from "../components/error-boundary";
 
 export default function Todos() {
   const navigate = useNavigate();
@@ -37,6 +38,10 @@ export default function Todos() {
       <Outlet />
     </Stack>
   );
+}
+
+export function ErrorBoundary() {
+  return <CommonErrorBoundary />;
 }
 
 export async function loader({ request }: LoaderFunctionArgs) {

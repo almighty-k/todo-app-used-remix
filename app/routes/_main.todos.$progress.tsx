@@ -39,6 +39,7 @@ import {
   getSession,
 } from "../lib/session.server";
 import { type UnwrapArray } from "../type";
+import { CommonErrorBoundary } from "../components/error-boundary";
 
 export default function TodosByProgress() {
   const { todos } = useLoaderData<typeof loader>();
@@ -158,6 +159,10 @@ function DeleteConfirmModal() {
       </Stack>
     </Modal>
   );
+}
+
+export function ErrorBoundary() {
+  return <CommonErrorBoundary />;
 }
 
 export async function loader({ params, request }: LoaderFunctionArgs) {
