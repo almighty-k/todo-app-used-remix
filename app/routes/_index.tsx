@@ -1,5 +1,9 @@
-import { Button } from "@mantine/core";
-import type { MetaFunction } from "@remix-run/node";
+import {
+  redirect,
+  type LoaderFunctionArgs,
+  type MetaFunction,
+} from "@remix-run/node";
+import { authenticator } from "../lib/auth.server";
 
 export const meta: MetaFunction = () => {
   return [
@@ -8,6 +12,9 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export default function Index() {
-  return <Button>test</Button>;
+export async function loader({ request }: LoaderFunctionArgs) {
+  await authenticator.isAuthenticated(request, {
+    failureRedirect: "/auth/sign-in",
+  });
+  return redirect("/todos/incomplete");
 }
