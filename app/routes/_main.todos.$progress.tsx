@@ -9,7 +9,6 @@ import {
   Form,
   NavLink,
   Outlet,
-  useFetcher,
   useLoaderData,
   useNavigate,
   useNavigation,
@@ -28,14 +27,10 @@ import {
 import invariant from "tiny-invariant";
 
 import { authenticator } from "../lib/auth.server";
-import {
-  EditIcon,
-  DeleteIcon,
-  BookmarkedIcon,
-  UnBookmarkedIcon,
-} from "../components/icons";
+import { EditIcon, DeleteIcon } from "../components/icons";
 import { TodoProgressBadge } from "../components/todos";
 import { CenterLoader } from "../components/loader";
+import { BookmarkButton } from "../components/button";
 import { changeTodoBookmarked, deleteTodo, getTodos } from "../lib/todo.server";
 import { ERROR_MESSAGES } from "../utils";
 import {
@@ -128,35 +123,6 @@ function TableRow({ todo }: TableRowProps) {
   );
 }
 
-interface BookmarkButtonProps {
-  todoId: number;
-  todoBookmarked: boolean;
-}
-
-function BookmarkButton({ todoId, todoBookmarked }: BookmarkButtonProps) {
-  const fetcher = useFetcher();
-  const bookmarked = fetcher.formData?.get("bookmarked")
-    ? fetcher.formData?.get("bookmarked") === "true"
-    : todoBookmarked;
-
-  return (
-    <fetcher.Form method="post">
-      <Button
-        type="submit"
-        name="intent"
-        value="bookmark"
-        variant="transparent"
-        size="xs"
-        p={0}
-      >
-        {bookmarked ? <BookmarkedIcon /> : <UnBookmarkedIcon />}
-      </Button>
-      <input hidden name="todoId" defaultValue={todoId} />
-      <input hidden name="bookmarked" defaultValue={String(todoBookmarked)} />
-    </fetcher.Form>
-  );
-}
-
 function DeleteConfirmModal() {
   const { progress } = useParams();
   invariant(progress, ERROR_MESSAGES.invalidParam);
@@ -233,8 +199,10 @@ export async function action({ request }: ActionFunctionArgs) {
       const todoId = Number(formData.get("todoId"));
       const prevBookmarked = formData.get("bookmarked") === "true";
 
-      await changeTodoBookmarked({ id: todoId, bookmarked: !prevBookmarked });
-      return null;
+      return await changeTodoBookmarked({
+        id: todoId,
+        bookmarked: !prevBookmarked,
+      });
     }
     default: {
       throw Error(ERROR_MESSAGES.unexpected);
