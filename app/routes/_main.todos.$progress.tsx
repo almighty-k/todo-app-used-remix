@@ -6,6 +6,7 @@ import {
 } from "@remix-run/node";
 import {
   Form,
+  NavLink,
   Outlet,
   useLoaderData,
   useNavigate,
@@ -78,7 +79,12 @@ export default function TodosByStatus() {
                 />
               </Table.Td>
               <Table.Td w="3rem">
-                <ActionIcon variant="light">
+                <ActionIcon
+                  renderRoot={(props) => (
+                    <NavLink to={`${todo.id}/edit`} replace {...props} />
+                  )}
+                  variant="light"
+                >
                   <EditIcon />
                 </ActionIcon>
               </Table.Td>
