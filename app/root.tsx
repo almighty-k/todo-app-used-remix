@@ -3,7 +3,11 @@ import "@mantine/notifications/styles.css";
 
 import { useEffect } from "react";
 import { cssBundleHref } from "@remix-run/css-bundle";
-import type { LinksFunction, LoaderFunctionArgs } from "@remix-run/node";
+import type {
+  LinksFunction,
+  LoaderFunctionArgs,
+  MetaFunction,
+} from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -26,6 +30,10 @@ import {
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
 ];
+
+export const meta: MetaFunction = () => {
+  return [{ title: "Todo App" }, { name: "description", content: "Todo App" }];
+};
 
 export default function App() {
   const { successMessage } = useLoaderData<typeof loader>();
