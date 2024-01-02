@@ -4,7 +4,7 @@ import { NavLink, Outlet, useLocation } from "@remix-run/react";
 import { useDisclosure } from "@mantine/hooks";
 
 import { authenticator } from "../lib/auth.server";
-import { TodosIcon, BookMarkIcon } from "../components/icons";
+import { TodosIcon, BookmarkIcon } from "../components/icons";
 
 export default function Todos() {
   const [opened, { toggle }] = useDisclosure();
@@ -56,7 +56,7 @@ function NavLinks() {
       label: "ブックマーク",
       to: "bookmarks",
       active: currentPath === "/bookmarks",
-      icon: <BookMarkIcon />,
+      icon: <BookmarkIcon />,
     },
   ];
 

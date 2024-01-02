@@ -17,7 +17,7 @@ export function TodosIcon(props: SVGProps<SVGSVGElement>) {
   );
 }
 
-export function BookMarkIcon(props: SVGProps<SVGSVGElement>) {
+export function BookmarkIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -80,6 +80,40 @@ export function DeleteIcon(props: SVGProps<SVGSVGElement>) {
       <path
         fill="currentColor"
         d="M5 21V6H4V4h5V3h6v1h5v2h-1v15zm2-2h10V6H7zm2-2h2V8H9zm4 0h2V8h-2zM7 6v13z"
+      ></path>
+    </svg>
+  );
+}
+
+export function BookmarkedIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="1.5rem"
+      height="1.5rem"
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <path
+        fill="#FCC419"
+        d="m5.825 22l2.325-7.6L2 10h7.6L12 2l2.4 8H22l-6.15 4.4l2.325 7.6L12 17.3z"
+      ></path>
+    </svg>
+  );
+}
+
+export function UnBookmarkedIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="1.5rem"
+      height="1.5rem"
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <path
+        fill="#FCC419"
+        d="m22 9.24l-7.19-.62L12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27L18.18 21l-1.63-7.03zM12 15.4l-3.76 2.27l1-4.28l-3.32-2.88l4.38-.38L12 6.1l1.71 4.04l4.38.38l-3.32 2.88l1 4.28z"
       ></path>
     </svg>
   );
