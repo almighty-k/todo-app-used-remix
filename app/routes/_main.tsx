@@ -53,7 +53,7 @@ function NavLinks() {
       icon: <TodosIcon />,
     },
     {
-      label: "ブックマーク",
+      label: "ブックマーク済み",
       to: "bookmarks",
       active: currentPath === "/bookmarks",
       icon: <BookmarkIcon />,
@@ -69,7 +69,7 @@ function NavLinks() {
           variant={link.active ? "light" : "transparent"}
           color={link.active ? "blue" : "gray"}
           leftSection={link.icon}
-          renderRoot={(props) => <NavLink to="incomplete" {...props} />}
+          renderRoot={(props) => <NavLink to={link.to} {...props} />}
         >
           {link.label}
         </Button>
