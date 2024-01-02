@@ -16,6 +16,11 @@ import {
 import { authenticator } from "../lib/auth.server";
 import { CreateTodoSchema, createTodo } from "../lib/todo.server";
 import { commonActionData } from "../utils";
+import {
+  SUCCESS_MESSAGE_KEY,
+  commitSession,
+  getSession,
+} from "../lib/session.server";
 
 export default function TodosNew() {
   const actionData = useActionData<typeof action>();
@@ -84,5 +89,13 @@ export async function action({ request }: ActionFunctionArgs) {
   });
 
   await createTodo({ userId: user.id, title: validated.data.title });
-  return redirect("/todos/incomplete");
+
+  const session = await getSession(request.headers.get("Cookie"));
+  session.flash(SUCCESS_MESSAGE_KEY, `${validated.data.title}を作成しました。`);
+
+  return redirect("/todos/incomplete", {
+    headers: {
+      "Set-Cookie": await commitSession(session),
+    },
+  });
 }

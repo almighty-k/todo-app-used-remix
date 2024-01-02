@@ -1,5 +1,7 @@
 import { createCookieSessionStorage } from "@remix-run/node";
 
+export const SUCCESS_MESSAGE_KEY = "successMessageKey";
+
 export const sessionStorage = createCookieSessionStorage({
   cookie: {
     name: "_session",
