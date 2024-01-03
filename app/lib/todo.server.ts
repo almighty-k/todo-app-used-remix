@@ -3,7 +3,7 @@ import { z } from "zod";
 import { prisma } from "./db.server";
 import { ERROR_MESSAGES } from "../utils";
 
-export async function getTodos({
+export async function getTodosByProgress({
   userId,
   progress,
 }: {

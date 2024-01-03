@@ -17,7 +17,7 @@ import {
   AuthSchema,
   authenticator,
 } from "../lib/auth.server";
-import { commonActionData } from "../utils";
+import { ERROR_MESSAGES, commonActionData } from "../utils";
 
 export default function SignIn() {
   const actionData = useActionData<typeof action>();
@@ -112,6 +112,6 @@ export async function action({ request }: ActionFunctionArgs) {
       });
     }
     console.error(error);
-    throw Error("unexpected error");
+    throw Error(ERROR_MESSAGES.unexpected);
   }
 }

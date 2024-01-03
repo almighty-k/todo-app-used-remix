@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import z from "zod";
 
 import { prisma } from "./db.server";
+import { ERROR_MESSAGES } from "../utils";
 
 const SALT_ROUNDS = 10;
 
@@ -44,6 +45,6 @@ export async function createUser({
       };
     }
     console.error(error);
-    throw Error("unexpected error");
+    throw Error(ERROR_MESSAGES.unexpected);
   }
 }

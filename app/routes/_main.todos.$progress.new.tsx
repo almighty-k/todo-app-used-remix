@@ -12,6 +12,7 @@ import {
   type LoaderFunctionArgs,
   json,
 } from "@remix-run/node";
+import invariant from "tiny-invariant";
 
 import { authenticator } from "../lib/auth.server";
 import { CreateTodoSchema, createTodo } from "../lib/todo.server";
@@ -21,7 +22,6 @@ import {
   commitSession,
   getSession,
 } from "../lib/session.server";
-import invariant from "tiny-invariant";
 
 export default function TodosNew() {
   const { progress } = useParams();

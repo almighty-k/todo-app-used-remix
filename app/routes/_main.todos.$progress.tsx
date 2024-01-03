@@ -31,7 +31,11 @@ import { EditIcon, DeleteIcon } from "../components/icons";
 import { TodoProgressBadge } from "../components/todos";
 import { CenterLoader } from "../components/loader";
 import { BookmarkButton } from "../components/button";
-import { changeTodoBookmarked, deleteTodo, getTodos } from "../lib/todo.server";
+import {
+  changeTodoBookmarked,
+  deleteTodo,
+  getTodosByProgress,
+} from "../lib/todo.server";
 import { ERROR_MESSAGES } from "../utils";
 import {
   SUCCESS_MESSAGE_KEY,
@@ -174,7 +178,7 @@ export async function loader({ params, request }: LoaderFunctionArgs) {
   invariant(progress, ERROR_MESSAGES.invalidParam);
 
   return json({
-    todos: await getTodos({ userId: user.id, progress }),
+    todos: await getTodosByProgress({ userId: user.id, progress }),
   });
 }
 
