@@ -27,7 +27,6 @@ https://github.com/almighty-k/todos-used-remix/assets/63405154/069749a4-280f-42c
 ```bash
 $ npm i
 $ npx prisma migrate dev
-$ npm run dev
 ```
 
 ## 動作確認
