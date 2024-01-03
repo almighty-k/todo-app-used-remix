@@ -29,7 +29,7 @@ export function BookmarkButton({
         {bookmarked ? <BookmarkedIcon /> : <UnBookmarkedIcon />}
       </Button>
       <input hidden name="todoId" defaultValue={todoId} />
-      <input hidden name="bookmarked" defaultValue={String(todoBookmarked)} />
+      <input hidden name="bookmarked" value={String(todoBookmarked)} readOnly />
     </fetcher.Form>
   );
 }
