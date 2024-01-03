@@ -1,38 +1,27 @@
-# Welcome to Remix!
+## 概要
 
-- [Remix Docs](https://remix.run/docs)
+- Remix を使用した Todo アプリのサンプル。
 
-## Development
+## 使用技術
 
-From your terminal:
+- [Remix](https://remix.run/): React フレームワーク
+- [remix-auth](https://github.com/sergiodxa/remix-auth): 認証
+- [Mantine](https://mantine.dev/): Components ライブラリ
+- [Zod](https://zod.dev/): バリデーション
+- [Prisma](https://www.prisma.io/): ORM。なお、今回はフロント実装部分がメインのため、簡略な実装に留める
 
-```sh
-npm run dev
-```
+## 実装機能
 
-This starts your app in development mode, rebuilding assets on file changes.
+- 認証。
+- TODO の一覧表示・作成・編集・削除処理。
+- 各種処理の成功時、エラーハンドリング時の通知実装。
+- ブックマーク機能。楽観的更新を使用。
 
-## Deployment
+## 環境構築等
 
-First, build your app for production:
-
-```sh
-npm run build
-```
-
-Then run the app in production mode:
-
-```sh
-npm start
-```
-
-Now you'll need to pick a host to deploy it to.
-
-### DIY
-
-If you're familiar with deploying node applications, the built-in Remix app server is production-ready.
-
-Make sure to deploy the output of `remix build`
-
-- `build/`
-- `public/build/`
+- 前提: node は v18.0.0 以上を使用
+  ```bash
+  $ npm i
+  $ npx prisma migrate dev
+  $ npm run dev
+  ```
